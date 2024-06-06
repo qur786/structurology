@@ -17,6 +17,7 @@ import {
 import { PROJECTS } from "./utils";
 import { Status } from "../Status";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function ProjectTable() {
   const [data, setData] = useState(PROJECTS); // In real life scenario this would be fetched from an API within useEffect and then setted to the state.
@@ -72,7 +73,15 @@ export function ProjectTable() {
         </TableHead>
         <TableBody>
           {data.map((project) => (
-            <TableRow key={project.projectName}>
+            <TableRow
+              component={Link}
+              to="/"
+              sx={{
+                textDecoration: "none",
+                ":hover": { backdropFilter: "brightness(95%)" },
+              }}
+              key={project.projectName}
+            >
               <TableCell component="th" scope="row">
                 <Typography variant="body1" fontWeight={700}>
                   {project.projectName}
