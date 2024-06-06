@@ -75,12 +75,12 @@ export function ProjectTable() {
           {data.map((project) => (
             <TableRow
               component={Link}
-              to="/"
+              to={`/projects/${project.id}`}
               sx={{
                 textDecoration: "none",
                 ":hover": { backdropFilter: "brightness(95%)" },
               }}
-              key={project.projectName}
+              key={project.id}
             >
               <TableCell component="th" scope="row">
                 <Typography variant="body1" fontWeight={700}>
