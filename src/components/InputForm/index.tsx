@@ -2,6 +2,7 @@ import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 import { Box, Chip, Tab, Typography } from "@mui/material";
 import { useState } from "react";
 import { CorroisonForm } from "../CorroisonForm";
+import { PMultiplierForm } from "../PMultiplierForm";
 
 export function InputForm({
   onSaveClick,
@@ -56,7 +57,9 @@ export function InputForm({
           <TabPanel value="corroison">
             <CorroisonForm onSubmitHook={onSaveClick} readOnly={readOnly} />
           </TabPanel>
-          <TabPanel value="p-multiplier">Coming Soon...</TabPanel>
+          <TabPanel value="p-multiplier">
+            <PMultiplierForm onSubmitHook={onSaveClick} readOnly={readOnly} />
+          </TabPanel>
         </TabContext>
       </Box>
     </>
