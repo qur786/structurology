@@ -1,6 +1,7 @@
 import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 import { Box, Chip, Tab, Typography } from "@mui/material";
 import { useState } from "react";
+import { CorroisonForm } from "../CorroisonForm";
 
 export function InputForm(): JSX.Element {
   const [tab, setTab] = useState("corroison");
@@ -46,7 +47,9 @@ export function InputForm(): JSX.Element {
               />
             </TabList>
           </Box>
-          <TabPanel value="corroison">Coming Soon...</TabPanel>
+          <TabPanel value="corroison">
+            <CorroisonForm />
+          </TabPanel>
           <TabPanel value="p-multiplier">Coming Soon...</TabPanel>
         </TabContext>
       </Box>
