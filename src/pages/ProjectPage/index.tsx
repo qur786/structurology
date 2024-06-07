@@ -1,4 +1,12 @@
-import { Button, Grid, Typography, Box, Tab } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Typography,
+  Box,
+  Tab,
+  IconButton,
+  IconButtonProps,
+} from "@mui/material";
 import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -13,10 +21,15 @@ import { InputForm } from "../../components/InputForm";
 
 export function ProjectPage(): JSX.Element {
   const [tab, setTab] = useState("input");
+  const [readOnly, setReadOnly] = useState(true);
   const { id } = useParams();
 
   const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
     setTab(newValue);
+  };
+
+  const handleFormReadonly: IconButtonProps["onClick"] = () => {
+    setReadOnly((prev) => !prev);
   };
 
   const selectedProject = useMemo(() => {
@@ -31,7 +44,9 @@ export function ProjectPage(): JSX.Element {
             <ArrowBackIos color="disabled" fontSize="small" />
           </Link>
           <Typography variant="h6">{selectedProject?.projectName}</Typography>
-          <EditOutlined />
+          <IconButton onClick={handleFormReadonly}>
+            <EditOutlined />
+          </IconButton>
         </Grid>
         <Grid container item xs={4} justifyContent="space-evenly">
           <Button variant="outlined" size="small" startIcon={<Save />}>
@@ -57,7 +72,7 @@ export function ProjectPage(): JSX.Element {
           <TabPanel value="details">Coming Soon...</TabPanel>
           <TabPanel value="settings">Coming Soon...</TabPanel>
           <TabPanel value="input">
-            <InputForm />
+            <InputForm readOnly={readOnly} />
           </TabPanel>
         </TabContext>
       </Box>

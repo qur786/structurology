@@ -3,7 +3,13 @@ import { Box, Chip, Tab, Typography } from "@mui/material";
 import { useState } from "react";
 import { CorroisonForm } from "../CorroisonForm";
 
-export function InputForm(): JSX.Element {
+export function InputForm({
+  onSaveClick,
+  readOnly,
+}: {
+  onSaveClick?: (values: unknown) => void;
+  readOnly?: boolean;
+}): JSX.Element {
   const [tab, setTab] = useState("corroison");
 
   const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
@@ -48,7 +54,7 @@ export function InputForm(): JSX.Element {
             </TabList>
           </Box>
           <TabPanel value="corroison">
-            <CorroisonForm />
+            <CorroisonForm onSubmitHook={onSaveClick} readOnly={readOnly} />
           </TabPanel>
           <TabPanel value="p-multiplier">Coming Soon...</TabPanel>
         </TabContext>
