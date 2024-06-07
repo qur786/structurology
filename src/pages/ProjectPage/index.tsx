@@ -1,5 +1,6 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { useMemo } from "react";
+import { Button, Grid, Typography, Box, Tab } from "@mui/material";
+import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PROJECTS } from "../../components/ProjectTable/utils";
 import {
@@ -10,11 +11,17 @@ import {
 } from "@mui/icons-material";
 
 export function ProjectPage(): JSX.Element {
+  const [tab, setTab] = useState("details");
   const { id } = useParams();
+
+  const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
+    setTab(newValue);
+  };
 
   const selectedProject = useMemo(() => {
     return PROJECTS.find((ele) => ele.id === id);
   }, [id]);
+
   return (
     <Grid container>
       <Grid container item alignItems="center">
@@ -35,6 +42,20 @@ export function ProjectPage(): JSX.Element {
           </Button>
         </Grid>
       </Grid>
+      <Box sx={{ width: "100%", typography: "body1" }}>
+        <TabContext value={tab}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList onChange={handleTabChange} textColor="inherit">
+              <Tab label="Details" value="details" />
+              <Tab label="Settings" value="settings" />
+              <Tab label="Input" value="input" />
+            </TabList>
+          </Box>
+          <TabPanel value="details">Coming Soon...</TabPanel>
+          <TabPanel value="settings">Coming Soon...</TabPanel>
+          <TabPanel value="input">Coming Soon...</TabPanel>
+        </TabContext>
+      </Box>
     </Grid>
   );
 }
