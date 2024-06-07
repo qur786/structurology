@@ -20,5 +20,5 @@ export const ProjectStatusToChipColorMap: Record<
 export const ProjectStatusToChipBackgroundMap: Record<ProjectStatus, string> = {
   Active: "#eefced",
   Pending: "#f7e9e1",
-  Compeleted: "#edfcfb",
+  Compeleted: "#d5e9f2",
 };

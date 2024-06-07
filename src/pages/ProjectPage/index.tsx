@@ -1,7 +1,7 @@
 import { Button, Grid, Typography, Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 import { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PROJECTS } from "../../components/ProjectTable/utils";
 import {
   ArrowBackIos,
@@ -9,9 +9,10 @@ import {
   PlayArrow,
   Save,
 } from "@mui/icons-material";
+import { InputForm } from "../../components/InputForm";
 
 export function ProjectPage(): JSX.Element {
-  const [tab, setTab] = useState("details");
+  const [tab, setTab] = useState("input");
   const { id } = useParams();
 
   const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
@@ -26,7 +27,9 @@ export function ProjectPage(): JSX.Element {
     <Grid container>
       <Grid container item alignItems="center">
         <Grid container item xs={8} gap={1} alignItems="center">
-          <ArrowBackIos color="disabled" fontSize="small" />
+          <Link to="/">
+            <ArrowBackIos color="disabled" fontSize="small" />
+          </Link>
           <Typography variant="h6">{selectedProject?.projectName}</Typography>
           <EditOutlined />
         </Grid>
@@ -53,7 +56,9 @@ export function ProjectPage(): JSX.Element {
           </Box>
           <TabPanel value="details">Coming Soon...</TabPanel>
           <TabPanel value="settings">Coming Soon...</TabPanel>
-          <TabPanel value="input">Coming Soon...</TabPanel>
+          <TabPanel value="input">
+            <InputForm />
+          </TabPanel>
         </TabContext>
       </Box>
     </Grid>
