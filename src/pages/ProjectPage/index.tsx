@@ -6,9 +6,10 @@ import {
   Tab,
   IconButton,
   IconButtonProps,
+  ButtonProps,
 } from "@mui/material";
 import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PROJECTS } from "../../components/ProjectTable/utils";
 import {
@@ -22,6 +23,7 @@ import { InputForm } from "../../components/InputForm";
 export function ProjectPage(): JSX.Element {
   const [tab, setTab] = useState("input");
   const [readOnly, setReadOnly] = useState(true);
+  const InputFormRef = useRef<{ submit: () => Promise<void> }>(null);
   const { id } = useParams();
 
   const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
@@ -30,6 +32,10 @@ export function ProjectPage(): JSX.Element {
 
   const handleFormReadonly: IconButtonProps["onClick"] = () => {
     setReadOnly((prev) => !prev);
+  };
+
+  const handleSaveClick: ButtonProps["onClick"] = () => {
+    InputFormRef.current?.submit();
   };
 
   const selectedProject = useMemo(() => {
@@ -52,7 +58,12 @@ export function ProjectPage(): JSX.Element {
           <Button variant="outlined" size="small" startIcon={<Save />}>
             Draft
           </Button>
-          <Button variant="outlined" size="small" startIcon={<Save />}>
+          <Button
+            variant="outlined"
+            size="small"
+            startIcon={<Save />}
+            onClick={handleSaveClick}
+          >
             Save
           </Button>
           <Button variant="contained" size="small" startIcon={<PlayArrow />}>
@@ -72,7 +83,7 @@ export function ProjectPage(): JSX.Element {
           <TabPanel value="details">Coming Soon...</TabPanel>
           <TabPanel value="settings">Coming Soon...</TabPanel>
           <TabPanel value="input">
-            <InputForm readOnly={readOnly} />
+            <InputForm readOnly={readOnly} ref={InputFormRef} />
           </TabPanel>
         </TabContext>
       </Box>

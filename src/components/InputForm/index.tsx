@@ -1,17 +1,28 @@
 import { TabContext, TabList, TabListProps, TabPanel } from "@mui/lab";
 import { Box, Chip, Tab, Typography } from "@mui/material";
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { CorroisonForm } from "../CorroisonForm";
 import { PMultiplierForm } from "../PMultiplierForm";
 
-export function InputForm({
-  onSaveClick,
-  readOnly,
-}: {
-  onSaveClick?: (values: unknown) => void;
-  readOnly?: boolean;
-}): JSX.Element {
+export const InputForm = forwardRef<
+  { submit: (values: unknown) => void },
+  {
+    readOnly?: boolean;
+  }
+>(({ readOnly }, ref): JSX.Element => {
   const [tab, setTab] = useState("corroison");
+  const CorroisonFormRef = useRef<{ submitForm: () => Promise<void> }>(null);
+  const PMultiplierFormRef = useRef<{ submitForm: () => Promise<void> }>(null);
+
+  useImperativeHandle(ref, () => ({
+    submit: () => {
+      if (tab === "corroison") {
+        CorroisonFormRef.current?.submitForm();
+      } else if (tab === "p-multiplier") {
+        PMultiplierFormRef.current?.submitForm();
+      }
+    },
+  }));
 
   const handleTabChange: TabListProps["onChange"] = (_event, newValue) => {
     setTab(newValue);
@@ -55,13 +66,13 @@ export function InputForm({
             </TabList>
           </Box>
           <TabPanel value="corroison">
-            <CorroisonForm onSubmitHook={onSaveClick} readOnly={readOnly} />
+            <CorroisonForm ref={CorroisonFormRef} readOnly={readOnly} />
           </TabPanel>
           <TabPanel value="p-multiplier">
-            <PMultiplierForm onSubmitHook={onSaveClick} readOnly={readOnly} />
+            <PMultiplierForm ref={PMultiplierFormRef} readOnly={readOnly} />
           </TabPanel>
         </TabContext>
       </Box>
     </>
   );
-}
+});
