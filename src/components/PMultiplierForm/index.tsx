@@ -3,6 +3,7 @@ import { Typography, TextField, Grid, FormLabel } from "@mui/material";
 import { PMultiplierFormNames, PMultiplierSchema } from "./utils";
 import { Form, Formik } from "formik";
 import { forwardRef, useImperativeHandle } from "react";
+import { downloadJSONFile } from "../utils";
 
 export const PMultiplierForm = forwardRef<
   { submitForm: () => Promise<void> },
@@ -25,18 +26,7 @@ export const PMultiplierForm = forwardRef<
       validationSchema={PMultiplierSchema}
       onSubmit={(values) => {
         const jsonData = JSON.stringify(values, null, 2);
-        const jsonBlob = new Blob([jsonData], { type: "application/json" });
-
-        const url = URL.createObjectURL(jsonBlob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "data.json";
-
-        document.body.appendChild(a);
-        a.click();
-
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        downloadJSONFile(jsonData);
       }}
     >
       {function Component({
