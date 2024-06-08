@@ -14,6 +14,7 @@ import { Link, useParams } from "react-router-dom";
 import { PROJECTS } from "../../components/ProjectTable/utils";
 import {
   ArrowBackIos,
+  EditOffOutlined,
   EditOutlined,
   PlayArrow,
   Save,
@@ -50,8 +51,11 @@ export function ProjectPage(): JSX.Element {
             <ArrowBackIos color="disabled" fontSize="small" />
           </Link>
           <Typography variant="h6">{selectedProject?.projectName}</Typography>
-          <IconButton onClick={handleFormReadonly}>
-            <EditOutlined />
+          <IconButton
+            onClick={handleFormReadonly}
+            title={readOnly ? "Edit form" : "Disable form"}
+          >
+            {readOnly ? <EditOutlined /> : <EditOffOutlined />}
           </IconButton>
         </Grid>
         <Grid container item xs={4} justifyContent="space-evenly">
