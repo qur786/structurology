@@ -1,7 +1,7 @@
-import { InfoOutlined } from "@mui/icons-material";
-import { Typography, TextField, Grid, FormLabel } from "@mui/material";
+import { Add, InfoOutlined } from "@mui/icons-material";
+import { Typography, TextField, Grid, FormLabel, Button } from "@mui/material";
 import { PMultiplierFormNames, PMultiplierSchema } from "./utils";
-import { Form, Formik } from "formik";
+import { FieldArray, Form, Formik } from "formik";
 import { forwardRef, useImperativeHandle } from "react";
 import { downloadJSONFile } from "../utils";
 
@@ -16,12 +16,7 @@ export const PMultiplierForm = forwardRef<
       initialValues={{
         start: 0,
         end: 0,
-        soilLayer1: 0,
-        soilLayer2: 0,
-        soilLayer3: 0,
-        soilLayer4: 0,
-        soilLayer5: 0,
-        soilLayer6: 0,
+        soilLayers: [],
       }}
       validationSchema={PMultiplierSchema}
       onSubmit={(values) => {
@@ -40,6 +35,7 @@ export const PMultiplierForm = forwardRef<
         useImperativeHandle(ref, () => ({
           submitForm,
         }));
+        console.log(errors.soilLayers);
         return (
           <Form>
             <Grid container gap={2}>
@@ -99,174 +95,67 @@ export const PMultiplierForm = forwardRef<
                     helperText={touched.end && !!errors.end ? errors.end : ""}
                   />
                 </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 1 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer1}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer1}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer1 && !!errors.soilLayer1}
-                    helperText={
-                      touched.soilLayer1 && !!errors.soilLayer1
-                        ? errors.soilLayer1
-                        : ""
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 2 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer2}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer2}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer2 && !!errors.soilLayer2}
-                    helperText={
-                      touched.soilLayer2 && !!errors.soilLayer2
-                        ? errors.soilLayer2
-                        : ""
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 3 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer3}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer3}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer3 && !!errors.soilLayer3}
-                    helperText={
-                      touched.soilLayer3 && !!errors.soilLayer3
-                        ? errors.soilLayer3
-                        : ""
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 4 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer4}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer4}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer4 && !!errors.soilLayer4}
-                    helperText={
-                      touched.soilLayer4 && !!errors.soilLayer4
-                        ? errors.soilLayer4
-                        : ""
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 5 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer5}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer5}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer5 && !!errors.soilLayer5}
-                    helperText={
-                      touched.soilLayer5 && !!errors.soilLayer5
-                        ? errors.soilLayer5
-                        : ""
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <FormLabel
-                    sx={{
-                      fontSize: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    Soil Layer 6 <InfoOutlined fontSize="small" />
-                  </FormLabel>
-                  <TextField
-                    fullWidth
-                    name={PMultiplierFormNames.soilLayer6}
-                    type="number"
-                    variant="filled"
-                    value={values.soilLayer6}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    disabled={readOnly}
-                    error={touched.soilLayer6 && !!errors.soilLayer6}
-                    helperText={
-                      touched.soilLayer6 && !!errors.soilLayer6
-                        ? errors.soilLayer6
-                        : ""
-                    }
-                  />
-                </Grid>
+                <FieldArray
+                  name="soilLayers"
+                  render={(arrayHelpers) => (
+                    <>
+                      <Grid container item xs={12}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          sx={{
+                            ":hover":
+                              values.soilLayers.length === 6
+                                ? {
+                                    cursor: "not-allowed",
+                                  }
+                                : {},
+                          }}
+                          startIcon={<Add />}
+                          onClick={() => {
+                            if (values.soilLayers.length < 6) {
+                              arrayHelpers.push(0);
+                            }
+                          }}
+                        >
+                          Add Soil Layer
+                        </Button>
+                      </Grid>
+                      {values.soilLayers.map((_, index) => (
+                        <Grid item xs={12} sm={5}>
+                          <FormLabel
+                            sx={{
+                              fontSize: 12,
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 0.5,
+                            }}
+                          >
+                            Soil Layer {index + 1}{" "}
+                            <InfoOutlined fontSize="small" />
+                          </FormLabel>
+                          <TextField
+                            fullWidth
+                            name={`${PMultiplierFormNames.soilLayers}.${index}`}
+                            type="number"
+                            variant="filled"
+                            value={values.soilLayers[index]}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            disabled={readOnly}
+                            error={touched.soilLayers && !!errors.soilLayers}
+                            helperText={
+                              touched.soilLayers &&
+                              Array.isArray(errors.soilLayers)
+                                ? errors.soilLayers[index]
+                                : ""
+                            }
+                          />
+                        </Grid>
+                      ))}
+                    </>
+                  )}
+                />
               </Grid>
             </Grid>
           </Form>
