@@ -22,9 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18 # Use a compatible Node.js version
+          node-version: 20 # Use a compatible Node.js version
       - name: Install yarn
         run: npm install -g yarn
       - name: Install dependencies
@@ -32,13 +32,12 @@ jobs:
       - name: Build
         run: yarn build
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist repository
-          name: github-pages
           path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
