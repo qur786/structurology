@@ -52,7 +52,7 @@ export const CorroisonForm = forwardRef<
                 </Typography>
               </Grid>
               <Grid container item spacing={2}>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={6}>
                   <FormLabel
                     sx={{
                       fontSize: 12,
@@ -80,7 +80,7 @@ export const CorroisonForm = forwardRef<
                     <MenuItem value="Method 3">Method 3</MenuItem>
                   </Select>
                 </Grid>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={6}>
                   <FormLabel
                     sx={{
                       fontSize: 12,
@@ -108,7 +108,7 @@ export const CorroisonForm = forwardRef<
                     }
                   />
                 </Grid>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={6}>
                   <FormLabel
                     sx={{
                       fontSize: 12,
@@ -136,7 +136,7 @@ export const CorroisonForm = forwardRef<
                     }
                   />
                 </Grid>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={6}>
                   <FormLabel
                     sx={{
                       fontSize: 12,

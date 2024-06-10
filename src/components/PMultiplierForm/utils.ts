@@ -1,12 +1,16 @@
 import { object, number, InferType, array } from "yup";
 
-export const PMultiplierSchema = object({
+const PMultiplierSchema = object({
   start: number().required(),
   end: number().required(),
-  soilLayers: array().of(number().required()).max(6),
+  soilLayer: number().required(),
 });
 
-export type PMultiplier = InferType<typeof PMultiplierSchema>;
+export const PMultipliersSchema = object({
+  input: array().of(PMultiplierSchema).min(1).max(6),
+});
+
+type PMultiplier = InferType<typeof PMultiplierSchema>;
 
 export const PMultiplierFormNames: Record<
   keyof PMultiplier,
@@ -14,5 +18,5 @@ export const PMultiplierFormNames: Record<
 > = {
   start: "start",
   end: "end",
-  soilLayers: "soilLayers",
+  soilLayer: "soilLayer",
 };
