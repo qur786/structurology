@@ -1,4 +1,4 @@
-import { Add, InfoOutlined } from "@mui/icons-material";
+import { Add, InfoOutlined, Remove } from "@mui/icons-material";
 import { Typography, TextField, Grid, FormLabel, Button } from "@mui/material";
 import { PMultiplierFormNames, PMultipliersSchema } from "./utils";
 import { FieldArray, Form, Formik } from "formik";
@@ -119,6 +119,22 @@ export const PMultiplierForm = forwardRef<
                               disabled={readOnly}
                             />
                           </Grid>
+                          {values.input.length > 1 ? (
+                            <Grid container item xs={12} justifyContent="end">
+                              <Button
+                                variant="contained"
+                                size="small"
+                                startIcon={<Remove />}
+                                onClick={() => {
+                                  if (values.input.length > 1) {
+                                    arrayHelpers.remove(index);
+                                  }
+                                }}
+                              >
+                                Remove Soil Layer
+                              </Button>
+                            </Grid>
+                          ) : undefined}
                         </Fragment>
                       ))}
                       <Grid container item xs={12}>
