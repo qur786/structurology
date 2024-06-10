@@ -49,7 +49,7 @@ export const PMultiplierForm = forwardRef<
                         <Fragment key={index}>
                           <Grid item xs={12} alignItems="center">
                             <Typography textAlign="center">
-                              P Multiplier {index + 1}
+                              Soil Layer {index + 1}
                             </Typography>
                           </Grid>
                           <Grid item xs={12} sm={6}>
