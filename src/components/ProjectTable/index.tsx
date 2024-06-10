@@ -33,7 +33,6 @@ export function ProjectTable() {
       const filteredData = PROJECTS.filter(
         (ele) =>
           searchRegex.test(ele.createdDate.toISOString()) ||
-          searchRegex.test(ele.projectName) ||
           searchRegex.test(ele.projectName),
       );
       return filteredData;
